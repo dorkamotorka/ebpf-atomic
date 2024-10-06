@@ -20,23 +20,23 @@ int atomic_ops(struct xdp_md *ctx) {
         return XDP_ABORTED;
     }
 
-    // Read value, add and return the new value
+    // Read value, add 5 and return the new value
     int new_val_add = __sync_fetch_and_add(value, 5);
     bpf_printk("After __sync_fetch_and_add: %d", new_val_add);
 
-    // Read value, subtract a number and return the new value
+    // Read value, subtract 2 and return the new value
     int new_val_sub = __sync_fetch_and_sub(value, 2);
     bpf_printk("After __sync_fetch_and_sub: %d", new_val_sub);
 
-    // Read value, binary OR a number and return the new value
+    // Read value, binary OR with 1 and return the new value
     int new_val_or = __sync_fetch_and_or(value, 1);
     bpf_printk("After __sync_fetch_and_or: %d", new_val_or);
 
-    // Read value, binary XOR a number and return the new value
+    // Read value, binary XOR with 3 and return the new value
     int new_val_xor = __sync_fetch_and_xor(value, 3);
     bpf_printk("After __sync_fetch_and_xor: %d", new_val_xor);
 
-    // Read value, check if it is equal, if true return the original value. On fail leave and return 100.
+    // Read value, check if it is equal to expected_val. If true return the original value. Otherwise return 100.
     int expected_val = *value;
     int new_val_cas = __sync_val_compare_and_swap(value, expected_val, 100);
     bpf_printk("After __sync_val_compare_and_swap: %d", new_val_cas);
