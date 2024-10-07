@@ -4,9 +4,9 @@ Atomic operations refers to atomic CPU instructions.
 
 A normal `i += 1` operation will at some level break down into:
 
-- Read i into some CPU register
-- Increment the CPU register with 1
-- Write the register value back to i
+- Read `i` into some CPU register
+- Increment the CPU register with `1`
+- Write the register value back to `i`
 
 Since this happens in multiple steps, even such a simple operation is subject to a race condition.
 
